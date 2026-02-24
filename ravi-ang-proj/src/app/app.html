@@ -1,3 +1,19 @@
-<h1 class="h1">Testing Application</h1>
+<h1 class="h1"> Day 1 Testing Application</h1>
+<div>Interpolation : <h2>  {{sample}}</h2></div>
+<h2>sample</h2>
+<!-- <button disabled = "{{isPropertyEnabled}}"> click me</button> -->
+ <br>
+ <h1>property binding</h1>
+<button [disabled]="isPropertyEnabled" > click me</button>
+
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<br>
+<h1>Event binding</h1>
+<button (click)="buttonClick()"> Button click event</button>
+
+<br>
+<h1>two way binding</h1>
+<input type="text" name="sample" id="sample" [(ngModel)]="sample"/>
+
 
 <router-outlet />
