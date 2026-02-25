@@ -1,16 +1,32 @@
 
-import { Component, signal } from '@angular/core';
+import { Component, DestroyRef, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterOutlet } from '@angular/router';
+import { NgClass, NgStyle } from '@angular/common';
+import { BackgroundColor } from './background-color';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, FormsModule],
+  imports: [RouterOutlet, FormsModule, NgClass, NgStyle, BackgroundColor],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
-export class App {
+export class App implements OnInit, OnDestroy {
   protected readonly title = signal('ravi-ang-proj');
+    
+  isUserActive: boolean = true;
+  UserNames: string[] = ["Ravi", "Kumar Chennai", "Ravi Andra", "Ravi Hyderabad", "Ravi Bangalore"];
+
+  constructor(){
+     console.log("App Component Constructed")
+  }
+  ngOnInit(): void {
+    console.log("App Component Initialized")
+  }
+
+  ngOnDestroy(): void {
+    console.log("App Component Destroyed")
+  }
 
   sample : string = "Day 2 Hello World";
   isPropertyEnabled : boolean = true;

@@ -5,3 +5,8 @@
 h1{
     color: rgb(255, 106, 0);
 }
+
+.fonts{
+    font-family: 'Courier New', Courier, monospace;
+    color: brown;    
+}

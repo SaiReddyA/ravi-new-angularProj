@@ -1,3 +1,26 @@
+
+<a href="/employeeForm">employeeForm</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+<a href="/">Home</a>
+
+@if(isUserActive){
+    <h2 appBackgroundColor> User is active</h2>
+}
+@else{
+    <h2 appBackgroundColor> User is inactive</h2>
+
+}
+
+@for (name of UserNames; track $index) {
+    <h2 [ngStyle]="{color: isUserActive ? 'blue' : 'red'}" >Index: {{$index}}</h2>
+    <h3 [ngClass]="isUserActive ? 'fonts' : ''"> {{name}} </h3>
+}
+
+
+
+<br>
+<br>
+<br>
+<br>
 <h1 class="h1"> Day 1 Testing Application</h1>
 <div>Interpolation : <h2>  {{sample}}</h2></div>
 <h2>sample</h2>
