@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-employee-form',
@@ -8,6 +8,13 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 })
 export class EmployeeForm implements OnDestroy, OnInit {
 
+  @Output() ChildEvent = new EventEmitter<string>();
+  @Input() name: string = "";
+
+  UpdateToParent(){
+     this.ChildEvent.emit("Data from child to parent component");
+  }
+  employeesList: string[] = ["Ravi", "Kumar Chennai", "Ravi Andra", "Ravi Hyderabad", "Ravi Bangalore"];
   constructor(){
     console.log("EmployeeForm Component Constructed")
   }

@@ -1,6 +1,25 @@
-
+<router-outlet />
 <a href="/employeeForm">employeeForm</a> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
 <a href="/">Home</a>
+
+<h2>Pipes Concept</h2>
+<p>{{date}}</p>
+<p>{{date | date}}</p>
+<p>{{date | date :'shortDate'}}</p>
+<p>{{date | date :'fullDate'}}</p>
+<p>{{date | date :'dd/MM/yyyy HH:mm:ss a'}}</p>
+<p>{{pipedName | uppercase}}</p>
+<p>{{pipedName | lowercase}}</p>
+<p>{{pipedName | capitalise}}</p>
+<p>{{price | currency : 'INR'}}</p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+
 
 @if(isUserActive){
     <h2 appBackgroundColor> User is active</h2>
@@ -39,4 +58,3 @@
 <input type="text" name="sample" id="sample" [(ngModel)]="sample"/>
 
 
-<router-outlet />
