@@ -1,0 +1,22 @@
+<h1>course-detail works!</h1>
+
+<form #courseForm="ngForm" (ngSubmit)="SubmitCourse(courseForm)">
+    <div class="mb-3">
+        <label for="courseName" class="form-label">Course Name</label>
+        <input type="text" class="form-control" id="courseName" ngModel name="couseName" required>
+    </div>
+    <div class="mb-3">
+        <label for="courseDescription" class="form-label">Course Description</label>
+        <textarea class="form-control" id="courseDescription" rows="3" ngModel name="CourseDescription"></textarea>
+    </div>
+    <button  class="btn btn-primary" type="submit">Save</button>
+</form>
+
+<h1>
+Course Name: {{courseForm.value.couseName}}
+</h1>
+<h1>
+Course Description: {{courseForm.value.CourseDescription}}
+</h1>
+<br>
+<br> 
