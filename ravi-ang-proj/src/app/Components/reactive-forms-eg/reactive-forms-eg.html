@@ -1,0 +1,26 @@
+<h1>reactive-forms-eg works!</h1>
+
+<div class="container">
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input id="name" formControlName="name1" class="form-control">
+            <span class="text-danger" *ngIf="name?.invalid && name?.touched">Name is required.</span>
+            <span class="text-danger" *ngIf="name?.hasError('minlength') && name?.touched">Name must be at least 3 characters long.</span>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input id="email" formControlName="email" class="form-control">
+            <span class="text-danger" *ngIf="email?.invalid && email?.touched">Email is required.</span> <br>
+            <span class="text-danger" *ngIf="email?.hasError('email') && email?.touched">Please enter a valid email address.</span> <br>
+            <span class="text-danger" *ngIf="email?.hasError('minlength') && email?.touched">Email must be at least 3 characters long.</span> <br>
+            <span class="text-danger" *ngIf="email?.dirty"> Email has been changed.</span>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input id="password" formControlName="password" class="form-control" type="password">
+            <span class="text-danger" *ngIf="password?.invalid && password?.touched">Password is required.</span>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>

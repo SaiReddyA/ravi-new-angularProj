@@ -4,10 +4,16 @@
     <div class="mb-3">
         <label for="courseName" class="form-label">Course Name</label>
         <input type="text" class="form-control" id="courseName" ngModel name="couseName" required>
+        <span class="text-danger" *ngIf="courseForm.submitted && !courseForm.value.couseName">Course Name is required.</span>
+        @if(isSubmitted && courseForm.value.couseName?.includes('@')){
+          <span class="text-danger">Course Name should not contain @ symbol.</span>
+        }
     </div>
     <div class="mb-3">
         <label for="courseDescription" class="form-label">Course Description</label>
         <textarea class="form-control" id="courseDescription" rows="3" ngModel name="CourseDescription"></textarea>
+        <span class="text-danger" *ngIf="courseForm.submitted && !courseForm.value.CourseDescription">Course Description is required.</span>
+
     </div>
     <button  class="btn btn-primary" type="submit">Save</button>
 </form>
