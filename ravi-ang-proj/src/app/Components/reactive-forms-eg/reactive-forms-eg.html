@@ -6,6 +6,8 @@
             <label for="name">Name:</label>
             <input id="name" formControlName="name1" class="form-control">
             <span class="text-danger" *ngIf="name?.invalid && name?.touched">Name is required.</span>
+            <span class="text-danger" *ngIf="name?.hasError('spaceError') && name?.touched">Name cannot contain spaces.</span>
+
             <span class="text-danger" *ngIf="name?.hasError('minlength') && name?.touched">Name must be at least 3 characters long.</span>
         </div>
         <div class="form-group">
