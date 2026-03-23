@@ -5,6 +5,7 @@ import { RouterOutlet } from '@angular/router';
 import { CurrencyPipe, DatePipe, LowerCasePipe, NgClass, NgStyle, UpperCasePipe } from '@angular/common';
 import { BackgroundColor } from './background-color';
 import { CapitalisePipe } from './capitalise-pipe';
+import { CRUD } from './Services/crud';
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,7 @@ export class App implements OnInit, OnDestroy {
   isUserActive: boolean = true;
   UserNames: string[] = ["Ravi", "Kumar Chennai", "Ravi Andra", "Ravi Hyderabad", "Ravi Bangalore"];
 
-  constructor(){
+  constructor(private curd: CRUD) {
      console.log("App Component Constructed")
   }
   ngOnInit(): void {

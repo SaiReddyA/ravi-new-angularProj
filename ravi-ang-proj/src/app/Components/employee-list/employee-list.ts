@@ -1,5 +1,6 @@
-import { Component, Output } from '@angular/core';
+import { Component, inject, Output } from '@angular/core';
 import { EmployeeForm } from '../employee-form/employee-form';
+import { CRUD } from '../../Services/crud';
 
 @Component({
   selector: 'app-employee-list',
@@ -14,4 +15,12 @@ export class EmployeeList {
     console.log("Message received from child component : " + $event);
     this.nameChange = $event;
   }
+
+//dependency injection
+constructor(public curd: CRUD, private crud1: CRUD) {
+  console.log("Employee List component constructor called");
+}
+curdobj  = inject(CRUD);
+
+
 }
