@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
 
 
 @Injectable({
@@ -7,28 +7,45 @@ import { Observable } from 'rxjs';
 })
 export class CRUD {
   
-observableData = new Observable((res)=>{
-  debugger
-  res.next("This data is coming from observable in CRUD service"); 
-  res.next("Second value adding to observable in CRUD service"); 
-});
+// observableData = new Observable((res)=>{
+//    res.next("This data is coming from observable in CRUD service"); 
+//   res.next("Second value adding to observable in CRUD service"); 
+// });
 
-promiceData = new Promise((resolve, reject)=>{
-  resolve("This data is coming from promice in CRUD service");
-});
+// promiseData = new Promise((resolve, reject)=>{
+//   resolve("This data is coming from promise in CRUD service");
+// });
 
+   subjectObject = new Subject<string>();
+   behaviourSubject = new BehaviorSubject<string>("Initial value");
   constructor() {
-    console.log("CRUD service constructor called");
+    //console.log("CRUD service constructor called");
+    this.subjectObject.next("Adding message to it")
 
-    this.observableData.subscribe((data)=>{
-      console.log("Data received from observable : " + data);
+    this.behaviourSubject.next("First value added to behaviour subject");
+    this.behaviourSubject.subscribe((data)=>{ 
+      console.log("Subscriber 1: Data received from behaviour subject : " + data);
     });
-
-
-    this.promiceData.then((data)=>{
-      console.log("Data received from promice : " + data);
+    
+    this.behaviourSubject.subscribe((data)=>{ 
+      console.log("Subscriber 2: Data received from behaviour subject : " + data);
     });
+    
+    this.behaviourSubject.next(" third value added to behaviour subject");
+
+
+
+
+    // this.observableData.subscribe((data)=>{
+    //   console.log("Data received from observable : " + data);
+    // });
+
+
+    // this.promiseData.then((data)=>{
+    //   console.log("Data received from promise : " + data);
+    // });
    }
+
 
 }
 
