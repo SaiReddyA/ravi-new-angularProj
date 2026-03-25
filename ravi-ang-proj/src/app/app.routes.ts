@@ -5,7 +5,7 @@ import { ReactiveFormsEg } from './Components/reactive-forms-eg/reactive-forms-e
 
 export const routes: Routes = [
     { path: 'employeeform', component: EmployeeForm }, 
-    { path: 'employeelist', component: EmployeeList }, //Egar loading implementation
+    { path: 'employee', component: EmployeeList }, //Egar loading implementation
     { path:'studentform', loadComponent: () => import('./Components/student-form/student-form').then(m => m.StudentForm)
     },
     { path: 'reactiveform', component: ReactiveFormsEg },

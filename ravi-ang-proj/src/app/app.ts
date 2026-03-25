@@ -22,20 +22,20 @@ export class App implements OnInit, OnDestroy {
   UserNames: string[] = ["Ravi", "Kumar Chennai", "Ravi Andra", "Ravi Hyderabad", "Ravi Bangalore"];
 
   constructor(private curd: CRUD) {
-   this.curd.subjectObject.next("Message from App Component before subscribing it.")
+  //  this.curd.subjectObject.next("Message from App Component before subscribing it.")
 
-     console.log("App Component Constructed")
-      this.curd.subjectObject.subscribe((data)=>{
-      console.log("Subscriber 1: Data received from subject : " + data);
-    });
+  //    console.log("App Component Constructed")
+  //     this.curd.subjectObject.subscribe((data)=>{
+  //     console.log("Subscriber 1: Data received from subject : " + data);
+  //   });
 
-     this.curd.subjectObject.subscribe((data)=>{
-      console.log("Subscriber 2: Data received from subject : " + data);
-    });
+  //    this.curd.subjectObject.subscribe((data)=>{
+  //     console.log("Subscriber 2: Data received from subject : " + data);
+  //   });
   }
   ngOnInit(): void {
     console.log("App Component Initialized")
-    this.curd.subjectObject.next("Message from App Component ngOnInit")
+    //this.curd.subjectObject.next("Message from App Component ngOnInit")
   }
 
   ngOnDestroy(): void {

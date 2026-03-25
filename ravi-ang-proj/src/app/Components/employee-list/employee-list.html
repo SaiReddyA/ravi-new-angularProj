@@ -1,3 +1,52 @@
-<p>employee-list works!</p>
 <h5> From child to Parent Info : {{nameChange}}</h5>
 <app-employee-form [name]="username" (ChildEvent)="receiveMessage($event)"></app-employee-form>
+
+<br><br><br>
+<p>employee-list works!</p>
+<div class="container">
+    <form (ngSubmit)="AddEmployee()">   
+        <div class="form-group">
+            <label for="username">Employee Name</label>
+            <input type="text" class="form-control" id="username" placeholder="Enter employee name" [(ngModel)]="employeeObject.name" name="name">            
+        </div>
+        <div class="form-group">
+            <label for="age">Employee Age</label>
+            <input type="number" class="form-control" id="age" placeholder="Enter employee age" [(ngModel)]="employeeObject.age" name="age">
+        </div>
+        <div class="form-group">
+            <label for="city">Employee City</label>
+            <input type="text" class="form-control" id="city" placeholder="Enter employee city" [(ngModel)]="employeeObject.city" name="city">    
+        </div>
+        <br>
+    <button class="btn btn-success" type="submit">Add Employee</button>
+    &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;    
+    <button class="btn btn-primary" (click)="GetEmployees()">Get Employees</button>
+
+    </form>
+    <br>
+</div>
+
+
+<table class="table table-bordered">
+    <tr class="table-header">
+        <th> Id</th>
+        <th> Name</th>
+        <th>Age</th>
+        <th>City</th>
+        <th>Actions</th>
+    </tr>
+    @for (item of employeeList; track $index) {
+        <tr>
+            <td>{{item.id}}</td>
+            <td>{{item.name}}</td>
+            <td>{{item.age}}</td>
+            <td>{{item.city}}</td>
+            <td>
+                <button class="btn btn-warning" (click)="EditEmployee(item)">Edit</button>
+                <button class="btn btn-danger" (click)="DeleteEmployee(item.id)">Delete</button>
+            </td>
+        </tr>
+    }
+</table>
+
+<br><br><br>
