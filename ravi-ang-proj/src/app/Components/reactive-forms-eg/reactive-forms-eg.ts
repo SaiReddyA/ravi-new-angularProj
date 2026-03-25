@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { spaceValidation1 } from './CustomValidator';
 
 @Component({
   selector: 'app-reactive-forms-eg',
@@ -13,7 +14,7 @@ export class ReactiveFormsEg {
   userForm !:FormGroup;
   constructor(private fb:FormBuilder) { 
     this.userForm =  this.fb.group({
-      name1: ['', [Validators.required, Validators.minLength(3)]],
+      name1: ['', [Validators.required, Validators.minLength(3) , spaceValidation1]],
       email: ['', [Validators.required, Validators.minLength(3), Validators.email]],
       password: ['', [Validators.required, Validators.minLength(3)]]
     })
