@@ -90,7 +90,7 @@ AddEmployee(): void{
   }
 
   EditEmployee(paramEmployee: Employee): void {
-      this.employeeObject = paramEmployee; // Populate the form with selected employee details for editing
+      this.employeeObject = {...paramEmployee}; // Populate the form with selected employee details for editing
   }
 
   DeleteEmployee(id:number){

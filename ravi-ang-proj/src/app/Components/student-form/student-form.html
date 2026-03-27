@@ -1,1 +1,72 @@
 <h2>student-form works!</h2>
+<!-- key concepts
+FormControl: This represents a single input field.
+
+FormGroup: This represents the whole form.
+
+FormBuilder: A service that allows clean creation of a form. -->
+
+<div class="container">
+    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input id="name" formControlName="name" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="dob">Date of Birth:</label>
+            <input id="dob" type="date" formControlName="dob" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input id="age" type="number" formControlName="age" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender:</label>
+            <div class="radio-group">
+                <label class="radio-label">
+                    <input type="radio" formControlName="gender" value="Male" />
+                    <span>Male</span>
+                </label>
+                <label class="radio-label">
+                    <input type="radio" formControlName="gender" value="Female" />
+                    <span>Female</span>
+                </label>
+                <label class="radio-label">
+                    <input type="radio" formControlName="gender" value="Other" />
+                    <span>Other</span>
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="place">Enter City/Town</label>
+            <input id="place" formControlName="place" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="pincode">Pincode</label>
+            <input id="pincode" formControlName="pincode" class="form-control">
+        </div>
+        <div class="form-group">
+            <label for="Address">Address</label>
+            <textarea id="Address" placeholder="Enter full address" rows="3" formControlName="Address"
+                class="form-control"></textarea>
+        </div>  
+        <button type="submit" class="btn btn-primary">Submit</button> 
+    </form> 
+</div> 
+
+
+@for( student of studentlist; track $index) {
+    <div class="card mb-3">
+        <div class="card-body">
+            <h5 class="card-title">{{student.name}}</h5>
+            <p class="card-text"><strong>DOB:</strong> {{student.dob }}</p>
+            <p class="card-text"><strong>Age:</strong> {{student.age}}</p>
+            <p class="card-text"><strong>Gender:</strong> {{student.gender}}</p>        
+            <p class="card-text"><strong>City:</strong> {{student.place}}</p>
+            <p class="card-text"><strong>Pincode:</strong> {{student.pincode}}</p>
+            <p class="card-text"><strong>Address:</strong> {{student.address}}</p>
+            <!-- <button class="btn btn-warning" (click)="EditStudent(student)">Edit</button>
+            <button class="btn btn-danger" (click)="DeleteStudent(student.id)">Delete</button> -->
+        </div>      
+    </div>
+}
