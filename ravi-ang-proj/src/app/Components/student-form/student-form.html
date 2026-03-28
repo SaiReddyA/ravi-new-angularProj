@@ -47,7 +47,7 @@ FormBuilder: A service that allows clean creation of a form. -->
         </div>
         <div class="form-group">
             <label for="Address">Address</label>
-            <textarea id="Address" placeholder="Enter full address" rows="3" formControlName="Address"
+            <textarea id="Address" placeholder="Enter full address" rows="3" formControlName="address"
                 class="form-control"></textarea>
         </div>  
         <button type="submit" class="btn btn-primary">Submit</button> 
@@ -55,18 +55,33 @@ FormBuilder: A service that allows clean creation of a form. -->
 </div> 
 
 
-@for( student of studentlist; track $index) {
-    <div class="card mb-3">
-        <div class="card-body">
-            <h5 class="card-title">{{student.name}}</h5>
-            <p class="card-text"><strong>DOB:</strong> {{student.dob }}</p>
-            <p class="card-text"><strong>Age:</strong> {{student.age}}</p>
-            <p class="card-text"><strong>Gender:</strong> {{student.gender}}</p>        
-            <p class="card-text"><strong>City:</strong> {{student.place}}</p>
-            <p class="card-text"><strong>Pincode:</strong> {{student.pincode}}</p>
-            <p class="card-text"><strong>Address:</strong> {{student.address}}</p>
-            <!-- <button class="btn btn-warning" (click)="EditStudent(student)">Edit</button>
-            <button class="btn btn-danger" (click)="DeleteStudent(student.id)">Delete</button> -->
-        </div>      
-    </div>
-}
+<table class="table table-striped">
+  <thead>   
+    <tr>
+      <th scope="col">Id</th>
+      <th scope="col">Name</th>
+      <th scope="col">DOB</th>
+      <th scope="col">Age</th>
+      <th scope="col">Gender</th>
+      <th scope="col">City</th>
+      <th scope="col">Pincode</th>
+      <th scope="col">Address</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for( student of studentlist; track $index) {
+        <tr>
+        <th scope="row">{{student.id}}</th>
+        <td>{{student.name}}</td>
+        <td>{{student.dob}}</td>
+        <td>{{student.age}}</td>
+        <td>{{student.gender}}</td>
+        <td>{{student.place}}</td>
+        <td>{{student.pincode}}</td>
+        <td>{{student.address}}</td>
+        <td><button class="btn btn-warning" (click)="EditStudent(student)">Edit</button></td>
+        <td><button class="btn btn-danger" (click)="DeleteStudent(student.id)">Delete</button></td>
+        </tr>
+    }
+  </tbody>
+</table>

@@ -64,27 +64,34 @@ export class Studentservice {
     return of (this.studentSamples);
   }
 
- AddStudent(student: Student):void {
+  AddStudent(student: Student): Observable<Student> {
     this.studentSamples.push(student);
-    
+    return of(student);
   }
-
- UpdateStudent(student: Student): void {
+ UpdateStudent(student: Student): Observable<Student> {
+ 
     const index = this.studentSamples.findIndex(s => s.id === student.id);    
     if (index !== -1) {
       this.studentSamples[index] = student;
+      return of(student);
+    }
+   else {
+    console.log("Student not found for update");
+    return of(student);
+    }
+  }
+
+ DeleteStudent(studentId: number): Observable<boolean> {
+    const index = this.studentSamples.findIndex(s => s.id === studentId   );
+    if (index !== -1) {
+      this.studentSamples.splice(index, 1)  ;
+      return of(true);
     }
    else {
     console.log("Student not found for update");
     }
+    return of(false );
   }
 
- DeleteStudent(studentId: number): void {
-    const index = this.studentSamples.findIndex(s => s.id === studentId   );
-    if (index !== -1) {
-      this.studentSamples.splice(index, 1);
-    } else {
-      console.log("Student not found for deletion");
-    } 
-  }
+ 
 }
