@@ -7,33 +7,34 @@ FormGroup: This represents the whole form.
 FormBuilder: A service that allows clean creation of a form. -->
 
 <div class="container">
-    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()" >
+    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
         <div class="form-group">
             <label for="name">Name:</label>
-            <input id="name" formControlName="name" class="form-control"  [class.is-invalid]="name?.invalid && name?.touched" >
+            <input id="name" formControlName="name" class="form-control"
+                [class.is-invalid]="name?.invalid && name?.touched">
             @if (name?.invalid && name?.touched) {
-      <div class="text-danger">
-        @if (name?.errors?.['required'])  { <small>Name is required.</small>             }
-        @if (name?.errors?.['minlength']) { <small>Minimum 3 characters required.</small> }
-        @if (name?.errors?.['maxlength']) { <small>Maximum 50 characters allowed.</small> }
-      </div>
-    }
+            <div class="text-danger">
+                @if (name?.errors?.['required']) { <small>Name is required.</small> }
+                @if (name?.errors?.['minlength']) { <small>Minimum 3 characters required.</small> }
+                @if (name?.errors?.['maxlength']) { <small>Maximum 50 characters allowed.</small> }
+            </div>
+            }
         </div>
         <div class="form-group">
             <label for="dob">Date of Birth:</label>
-            <input id="dob" type="date" [max]="today"  formControlName="dob" class="form-control" class="form-control"
-      [class.is-invalid]="dob?.invalid && dob?.touched">
-          @if (dob?.invalid && dob?.touched) {
-      <div class="text-danger">
-        @if (dob?.errors?.['required']) { <small>Date of Birth is required.</small> }
-      </div>
-    }
+            <input id="dob" type="date" [max]="today" formControlName="dob" class="form-control" class="form-control"
+                [class.is-invalid]="dob?.invalid && dob?.touched">
+            @if (dob?.invalid && dob?.touched) {
+            <div class="text-danger">
+                @if (dob?.errors?.['required']) { <small>Date of Birth is required.</small> }
+            </div>
+            }
 
         </div>
         <div class="form-group">
             <label for="age">Age:</label>
-            <input id="age" type="number" formControlName="age" (click)="display()"  class="form-control" >
-             
+            <input id="age" type="number" formControlName="age" (click)="display()" class="form-control">
+
         </div>
         <div class="form-group">
             <label for="gender">Gender:</label>
@@ -50,80 +51,85 @@ FormBuilder: A service that allows clean creation of a form. -->
                     <input type="radio" formControlName="gender" value="Other" />
                     <span>Other</span>
                 </label>
-                 @if (gender?.invalid && gender?.touched) {
-      <div class="text-danger">
-        @if (gender?.errors?.['required']) { <small>Please select a gender.</small> }
-      </div>
-    }
+                @if (gender?.invalid && gender?.touched) {
+                <div class="text-danger">
+                    @if (gender?.errors?.['required']) { <small>Please select a gender.</small> }
+                </div>
+                }
             </div>
         </div>
         <div class="form-group">
             <label for="place">Enter City/Town</label>
-            <input id="place" formControlName="place" class="form-control" [class.is-invalid]="place?.invalid && place?.touched">
-             @if (place?.invalid && place?.touched) {
-      <div class="text-danger">
-        @if (place?.errors?.['required'])  { <small>Place is required.</small>             }
-        @if (place?.errors?.['minlength']) { <small>Minimum 2 characters required.</small> }
-        @if (place?.errors?.['maxlength']) { <small>Maximum 50 characters allowed.</small> }
-      </div>
-    }
+            <input id="place" formControlName="place" class="form-control"
+                [class.is-invalid]="place?.invalid && place?.touched">
+            @if (place?.invalid && place?.touched) {
+            <div class="text-danger">
+                @if (place?.errors?.['required']) { <small>Place is required.</small> }
+                @if (place?.errors?.['minlength']) { <small>Minimum 2 characters required.</small> }
+                @if (place?.errors?.['maxlength']) { <small>Maximum 50 characters allowed.</small> }
+            </div>
+            }
         </div>
         <div class="form-group">
             <label for="pincode">Pincode</label>
             <input id="pincode" formControlName="pincode" class="form-control" maxlength="6"
-       [class.is-invalid]="pincode?.invalid && pincode?.touched">
-       @if (pincode?.invalid && pincode?.touched) {
-      <div class="text-danger">
-        @if (pincode?.errors?.['required']) { <small>Pincode is required.</small>           }
-        @if (pincode?.errors?.['pattern'])  { <small>Enter valid 6-digit pincode.</small>   }
-      </div>
-    }
+                [class.is-invalid]="pincode?.invalid && pincode?.touched">
+            @if (pincode?.invalid && pincode?.touched) {
+            <div class="text-danger">
+                @if (pincode?.errors?.['required']) { <small>Pincode is required.</small> }
+                @if (pincode?.errors?.['pattern']) { <small>Enter valid 6-digit pincode.</small> }
+                @if (pincode?.errors?.['startsWithZero']) {
+                <small>Pincode cannot start with 0.</small>
+                }
+                
+            </div>
+            }
         </div>
         <div class="form-group">
             <label for="Address">Address</label>
-            <textarea id="Address" placeholder="Enter full address" class="form-control" rows="4"  formControlName="address"
-                [class.is-invalid]="address?.invalid && address?.touched"></textarea>
-                @if (address?.invalid && address?.touched) {
-      <div class="text-danger">
-        @if (address?.errors?.['required'])  { <small>Address is required.</small>            }
-        @if (address?.errors?.['minlength']) { <small>Minimum 10 characters required.</small> }
-        @if (address?.errors?.['maxlength']) { <small>Maximum 100 characters allowed.</small> }
-      </div>
-    }
-        </div>  
-        <br/>
-        <button type="submit" class="btn btn-primary">Submit</button> 
-    </form> 
-</div> 
+            <textarea id="Address" placeholder="Enter full address" class="form-control" rows="4"
+                formControlName="address" [class.is-invalid]="address?.invalid && address?.touched"></textarea>
+            @if (address?.invalid && address?.touched) {
+            <div class="text-danger">
+                @if (address?.errors?.['required']) { <small>Address is required.</small> }
+                @if (address?.errors?.['minlength']) { <small>Minimum 10 characters required.</small> }
+                @if (address?.errors?.['maxlength']) { <small>Maximum 100 characters allowed.</small> }
+            </div>
+            }
+        </div>
+        <br />
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
 
 
 <table class="table table-striped">
-  <thead>   
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Name</th>
-      <th scope="col">DOB</th>
-      <th scope="col">Age</th>
-      <th scope="col">Gender</th>
-      <th scope="col">City</th>
-      <th scope="col">Pincode</th>
-      <th scope="col">Address</th>
-    </tr>
-  </thead>
-  <tbody>
-    @for( student of studentlist; track $index) {
+    <thead>
         <tr>
-        <th scope="row">{{student.id}}</th>
-        <td>{{student.name}}</td>
-        <td>{{student.dob}}</td>
-        <td>{{student.age}}</td>
-        <td>{{student.gender}}</td>
-        <td>{{student.place}}</td>
-        <td>{{student.pincode}}</td>
-        <td>{{student.address}}</td>
-        <td><button class="btn btn-warning" (click)="EditStudent(student)">Edit</button></td>
-        <td><button class="btn btn-danger" (click)="DeleteStudent(student.id)">Delete</button></td>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">DOB</th>
+            <th scope="col">Age</th>
+            <th scope="col">Gender</th>
+            <th scope="col">City</th>
+            <th scope="col">Pincode</th>
+            <th scope="col">Address</th>
         </tr>
-    }
-  </tbody>
+    </thead>
+    <tbody>
+        @for( student of studentlist; track $index) {
+        <tr>
+            <th scope="row">{{student.id}}</th>
+            <td>{{student.name | uppercase }}</td>
+            <td>{{student.dob}}</td>
+            <td>{{student.age}}</td>
+            <td>{{student.gender | titlecase }}</td>
+            <td>{{student.place | titlecase }}</td>
+            <td>{{student.pincode | maskPincode }}</td>
+            <td>{{student.address}}</td>
+            <td><button class="btn btn-warning" (click)="EditStudent(student)">Edit</button></td>
+            <td><button class="btn btn-danger" (click)="DeleteStudent(student.id)">Delete</button></td>
+        </tr>
+        }
+    </tbody>
 </table>

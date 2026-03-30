@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Studentservice } from '../../Services/studentservice';
-
+import { TitleCasePipe , UpperCasePipe } from '@angular/common';
+import { MaskPincodePipe } from '../../mask-pincode-pipe';
+import { pincodeValidator } from '../../pincode.validator'; 
 export interface Student {
   id: number;
   name: string;
@@ -15,7 +17,7 @@ export interface Student {
 
 @Component({
   selector: 'app-student-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule , TitleCasePipe, UpperCasePipe , MaskPincodePipe],
   templateUrl: './student-form.html',
   styleUrl: './student-form.css',
 })
@@ -32,7 +34,7 @@ export class StudentForm {
       age: [0],
       gender: ['', Validators.required],
       place: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
-      pincode: ['', [Validators.required, Validators.pattern('^[1-9][0-9]{5}$')]],
+      pincode: ['', [Validators.required, pincodeValidator, Validators.pattern('^[1-9][0-9]{5}$')]],
       address: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
     });
   }
