@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Studentservice } from '../../Services/studentservice';
 
 export interface Student {
@@ -26,32 +26,49 @@ export class StudentForm {
 
   constructor(private fb: FormBuilder, private studentservice: Studentservice) {
     this.studentForm = fb.group({
-      id : new FormControl(),
-      name: new FormControl(),
-      dob: new FormControl(),
-      age: new FormControl(),
-      gender: new FormControl(),
-      place: new FormControl(),
-      pincode: new FormControl(),
-      address: new FormControl()
+      id: [0],
+      name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],   //  all in one array
+      dob: ['', Validators.required],
+      age: [0],
+      gender: ['', Validators.required],
+      place: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(50)]],
+      pincode: ['', [Validators.required, Validators.pattern('^[1-9][0-9]{5}$')]],
+      address: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(100)]],
     });
+  }
+
+  get name() { return this.studentForm.get('name'); }
+  get dob() { return this.studentForm.get('dob'); }
+  get age() { return this.studentForm.get('age'); }
+  get gender() { return this.studentForm.get('gender'); }
+  get place() { return this.studentForm.get('place'); }
+  get pincode() { return this.studentForm.get('pincode'); }
+  get address() { return this.studentForm.get('address'); }
+
+  // add this getter
+  get today(): string {
+    return new Date().toISOString().split('T')[0]; // returns "2026-03-30"
   }
 
   onSubmit() {
-    const formData = this.studentForm.getRawValue() as Student; // ✅ always from form
-
-  if (formData.id === 0) {
-    formData.id = this.studentlist.length + 1;
-    this.studentservice.AddStudent(formData).subscribe(() => {
-      this.getstudentdata();
-      this.studentForm.reset({ id: 0 });
-    });
-  } else {
-    this.studentservice.UpdateStudent(formData).subscribe(() => {
-      this.getstudentdata();
-      this.studentForm.reset({ id: 0 });
-    });
+    if (this.studentForm.invalid) {
+    this.studentForm.markAllAsTouched(); //  to show validation errors if user tries to submit without filling the form
+    return;
   }
+    const formData = this.studentForm.getRawValue() as Student; //  always from form
+
+    if (formData.id === 0) {
+      formData.id = this.studentlist.length + 1;
+      this.studentservice.AddStudent(formData).subscribe(() => {
+        this.getstudentdata();
+        this.studentForm.reset({ id: 0 });
+      });
+    } else {
+      this.studentservice.UpdateStudent(formData).subscribe(() => {
+        this.getstudentdata();
+        this.studentForm.reset({ id: 0 });
+      });
+    }
   }
 
   studentobject: Student = {
@@ -75,17 +92,43 @@ export class StudentForm {
 
   ngOnInit(): void {
     this.getstudentdata();
+    // for auto age calculation based on dob
+    this.dob?.valueChanges.subscribe((dobValue: string) => {
+      if (dobValue) {
+        const age = this.calculateAge(new Date(dobValue));
+        this.age?.setValue(age, { emitEvent: false });
+      } else {
+        this.age?.setValue(null);
+      }
+    });
+
   }
 
-EditStudent(student: Student) {
-  this.studentobject = { ...student };          
-  this.studentForm.patchValue({ ...student }); // ✅ just patch the form, done!
+calculateAge(dob: Date): number {
+  const today = new Date();
+  let age = today.getFullYear() - dob.getFullYear();
+
+  const monthDiff = today.getMonth() - dob.getMonth();
+
+  if (
+    monthDiff < 0 ||
+    (monthDiff === 0 && today.getDate() < dob.getDate())
+  ) {
+    age--;
+  }
+
+  return age;
 }
 
+  EditStudent(student: Student) {
+    this.studentobject = { ...student };
+    this.studentForm.patchValue({ ...student }); //  just patch the form, done!
+  }
+
   DeleteStudent(id: number) {
-  this.studentservice.DeleteStudent(id).subscribe(() => {  // ✅ subscribe first
-    this.getstudentdata(); // ✅ refresh AFTER delete completes
-  });
-}
+    this.studentservice.DeleteStudent(id).subscribe(() => {  //  subscribe first
+      this.getstudentdata(); // ✅ refresh AFTER delete completes
+    });
+  }
 
 }

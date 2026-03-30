@@ -7,18 +7,33 @@ FormGroup: This represents the whole form.
 FormBuilder: A service that allows clean creation of a form. -->
 
 <div class="container">
-    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()">
+    <form [formGroup]="studentForm" (ngSubmit)="onSubmit()" >
         <div class="form-group">
             <label for="name">Name:</label>
-            <input id="name" formControlName="name" class="form-control">
+            <input id="name" formControlName="name" class="form-control"  [class.is-invalid]="name?.invalid && name?.touched" >
+            @if (name?.invalid && name?.touched) {
+      <div class="text-danger">
+        @if (name?.errors?.['required'])  { <small>Name is required.</small>             }
+        @if (name?.errors?.['minlength']) { <small>Minimum 3 characters required.</small> }
+        @if (name?.errors?.['maxlength']) { <small>Maximum 50 characters allowed.</small> }
+      </div>
+    }
         </div>
         <div class="form-group">
             <label for="dob">Date of Birth:</label>
-            <input id="dob" type="date" formControlName="dob" class="form-control">
+            <input id="dob" type="date" [max]="today"  formControlName="dob" class="form-control" class="form-control"
+      [class.is-invalid]="dob?.invalid && dob?.touched">
+          @if (dob?.invalid && dob?.touched) {
+      <div class="text-danger">
+        @if (dob?.errors?.['required']) { <small>Date of Birth is required.</small> }
+      </div>
+    }
+
         </div>
         <div class="form-group">
             <label for="age">Age:</label>
-            <input id="age" type="number" formControlName="age" class="form-control">
+            <input id="age" type="number" formControlName="age" class="form-control" readonly >
+             
         </div>
         <div class="form-group">
             <label for="gender">Gender:</label>
@@ -35,21 +50,48 @@ FormBuilder: A service that allows clean creation of a form. -->
                     <input type="radio" formControlName="gender" value="Other" />
                     <span>Other</span>
                 </label>
+                 @if (gender?.invalid && gender?.touched) {
+      <div class="text-danger">
+        @if (gender?.errors?.['required']) { <small>Please select a gender.</small> }
+      </div>
+    }
             </div>
         </div>
         <div class="form-group">
             <label for="place">Enter City/Town</label>
-            <input id="place" formControlName="place" class="form-control">
+            <input id="place" formControlName="place" class="form-control" [class.is-invalid]="place?.invalid && place?.touched">
+             @if (place?.invalid && place?.touched) {
+      <div class="text-danger">
+        @if (place?.errors?.['required'])  { <small>Place is required.</small>             }
+        @if (place?.errors?.['minlength']) { <small>Minimum 2 characters required.</small> }
+        @if (place?.errors?.['maxlength']) { <small>Maximum 50 characters allowed.</small> }
+      </div>
+    }
         </div>
         <div class="form-group">
             <label for="pincode">Pincode</label>
-            <input id="pincode" formControlName="pincode" class="form-control">
+            <input id="pincode" formControlName="pincode" class="form-control" maxlength="6"
+       [class.is-invalid]="pincode?.invalid && pincode?.touched">
+       @if (pincode?.invalid && pincode?.touched) {
+      <div class="text-danger">
+        @if (pincode?.errors?.['required']) { <small>Pincode is required.</small>           }
+        @if (pincode?.errors?.['pattern'])  { <small>Enter valid 6-digit pincode.</small>   }
+      </div>
+    }
         </div>
         <div class="form-group">
             <label for="Address">Address</label>
-            <textarea id="Address" placeholder="Enter full address" rows="3" formControlName="address"
-                class="form-control"></textarea>
+            <textarea id="Address" placeholder="Enter full address" class="form-control" rows="4"  formControlName="address"
+                [class.is-invalid]="address?.invalid && address?.touched"></textarea>
+                @if (address?.invalid && address?.touched) {
+      <div class="text-danger">
+        @if (address?.errors?.['required'])  { <small>Address is required.</small>            }
+        @if (address?.errors?.['minlength']) { <small>Minimum 10 characters required.</small> }
+        @if (address?.errors?.['maxlength']) { <small>Maximum 100 characters allowed.</small> }
+      </div>
+    }
         </div>  
+        <br/>
         <button type="submit" class="btn btn-primary">Submit</button> 
     </form> 
 </div> 
