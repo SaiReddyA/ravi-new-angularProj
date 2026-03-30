@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Student } from '../Components/student-form/student-form';
 import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -60,13 +61,23 @@ export class Studentservice {
     }
   ];
 
-  getstudentlist(): Observable<Student[]> {
-    return of (this.studentSamples);
+  constructor(private http:HttpClient) {
   }
 
-  AddStudent(student: Student): Observable<Student> {
+  postLgoginData(): Observable<any>{
+    const data = {
+        "username": "sai",
+        "password": "1234"
+    }
+  return this.http.post('https://localhost:7228/api/Auth/login', data);
+}
+  getstudentlist(): Observable<Student[]> {
+    return of(this.studentSamples);
+  }
+
+  AddStudent(student: Student): Promise<Student> {
     this.studentSamples.push(student);
-    return of(student);
+    return Promise.resolve(student);
   }
  UpdateStudent(student: Student): Observable<Student> {
  

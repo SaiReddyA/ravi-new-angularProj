@@ -59,7 +59,7 @@ export class StudentForm {
 
     if (formData.id === 0) {
       formData.id = this.studentlist.length + 1;
-      this.studentservice.AddStudent(formData).subscribe(() => {
+      this.studentservice.AddStudent(formData).then(() => {
         this.getstudentdata();
         this.studentForm.reset({ id: 0 });
       });
@@ -92,17 +92,35 @@ export class StudentForm {
 
   ngOnInit(): void {
     this.getstudentdata();
+    const test = this.studentForm.get('name');
+    test?.valueChanges
     // for auto age calculation based on dob
     this.dob?.valueChanges.subscribe((dobValue: string) => {
       if (dobValue) {
         const age = this.calculateAge(new Date(dobValue));
-        this.age?.setValue(age, { emitEvent: false });
+        this.age?.setValue(age, { emitEvent: true });
       } else {
         this.age?.setValue(null);
       }
     });
 
+    this.age?.valueChanges.subscribe((ageValue: number) => {
+      console.log('Age value changed: ' + ageValue);
+    } 
+  );
+
+
+  this.studentservice.postLgoginData().subscribe((response)=>{
+      console.log("Login API response : " + JSON.stringify(response));
+  });
+
   }
+
+  display()
+  {
+    console.log('age value from form control changed : ' + this.age?.value);
+  }
+
 
 calculateAge(dob: Date): number {
   const today = new Date();
