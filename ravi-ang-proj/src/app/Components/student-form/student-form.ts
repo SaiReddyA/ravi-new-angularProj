@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Studentservice } from '../../Services/studentservice';
-import { TitleCasePipe , UpperCasePipe } from '@angular/common';
+import { AsyncPipe, TitleCasePipe , UpperCasePipe } from '@angular/common';
 import { MaskPincodePipe } from '../../mask-pincode-pipe';
 import { pincodeValidator } from '../../pincode.validator'; 
+import { WhetherForecast } from '../../Services/whether-forecast';
 export interface Student {
   id: number;
   name: string;
@@ -14,10 +15,9 @@ export interface Student {
   address: string;
   pincode: string;
 }
-
 @Component({
   selector: 'app-student-form',
-  imports: [ReactiveFormsModule , TitleCasePipe, UpperCasePipe , MaskPincodePipe],
+  imports: [ReactiveFormsModule , TitleCasePipe, UpperCasePipe , MaskPincodePipe, AsyncPipe],
   templateUrl: './student-form.html',
   styleUrl: './student-form.css',
 })
@@ -26,7 +26,7 @@ export class StudentForm {
 
   studentForm!: FormGroup;
 
-  constructor(private fb: FormBuilder, private studentservice: Studentservice) {
+  constructor(private fb: FormBuilder, public studentservice: Studentservice, private whetherForecast: WhetherForecast) {
     this.studentForm = fb.group({
       id: [0],
       name: ['', [Validators.required, Validators.minLength(3), Validators.maxLength(50)]],   //  all in one array
@@ -108,8 +108,17 @@ export class StudentForm {
 
     this.age?.valueChanges.subscribe((ageValue: number) => {
       console.log('Age value changed: ' + ageValue);
-    } 
-  );
+    } );
+
+    this.whetherForecast.getForecast().subscribe((forecast) => {
+      console.log("Weather Forecast API response : " + JSON.stringify(forecast));
+    });
+    this.whetherForecast.put().subscribe((response) => {
+      console.log("PUT API response : " + JSON.stringify(response));
+    });
+      this.whetherForecast.delete().subscribe((response) => {
+      console.log("DELETE API response : " + JSON.stringify(response));
+    } );
 
 
   this.studentservice.postLgoginData().subscribe((response)=>{

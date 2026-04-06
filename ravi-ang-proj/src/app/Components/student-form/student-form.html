@@ -117,7 +117,7 @@ FormBuilder: A service that allows clean creation of a form. -->
         </tr>
     </thead>
     <tbody>
-        @for( student of studentlist; track $index) {
+        @for( student of this.studentservice.getstudentlist() | async; track $index) {
         <tr>
             <th scope="row">{{student.id}}</th>
             <td>{{student.name | uppercase }}</td>

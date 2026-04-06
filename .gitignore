@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/ravi-ang-proj/API/Test API/.vs/Test API.slnx
+/ravi-ang-proj/API/Test API/bin/Debug/net10.0
+/ravi-ang-proj/API/Test API/obj
