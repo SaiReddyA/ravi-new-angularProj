@@ -10,18 +10,26 @@ export class WhetherForecast {
   constructor(private http: HttpClient) { }
 
   getForecast(): Observable<any> {
-      return this.http.get('https://localhost:7228/api/Auth');
+      return this.http.get('http://localhost:5153/weatherforecast');
+  }
+
+  Add(): Promise<any> {
+     let data = {
+      'id': 0,
+      'Sumary': 'whatadd'
+     }
+      return this.http.post('http://localhost:5153/weatherforecast', data).toPromise();
   }
 
   put(): Observable<any> {
      let data = {
-      'id': 0,
-      'sumary': 'what'
+      'id': 1,
+      'Sumary': 'whattbvd'
      }
-      return this.http.put('https://localhost:7228/api/Auth?id=2&sumary=test', data);
+      return this.http.put('http://localhost:5153/weatherforecast', data);
   }
 
   delete(): Observable<any> {
-    return this.http.delete('https://localhost:7228/api/Auth?id=2');
+    return this.http.delete('http://localhost:5153/weatherforecast?id=6');
   } 
 }

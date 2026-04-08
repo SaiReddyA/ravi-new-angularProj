@@ -110,15 +110,22 @@ export class StudentForm {
       console.log('Age value changed: ' + ageValue);
     } );
 
-    this.whetherForecast.getForecast().subscribe((forecast) => {
-      console.log("Weather Forecast API response : " + JSON.stringify(forecast));
+ 
+    this.whetherForecast.Add().then((response) => {
+      console.log("POST API response : " + JSON.stringify(response));
     });
     this.whetherForecast.put().subscribe((response) => {
       console.log("PUT API response : " + JSON.stringify(response));
     });
+  this.whetherForecast.getForecast().subscribe((forecast) => {
+      console.log("Weather Forecast API response : " + JSON.stringify(forecast));
+    });
       this.whetherForecast.delete().subscribe((response) => {
       console.log("DELETE API response : " + JSON.stringify(response));
     } );
+   this.whetherForecast.getForecast().subscribe((forecast) => {
+      console.log("Weather Forecast API response : " + JSON.stringify(forecast));
+    });
 
 
   this.studentservice.postLgoginData().subscribe((response)=>{

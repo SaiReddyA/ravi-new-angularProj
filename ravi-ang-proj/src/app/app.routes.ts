@@ -11,6 +11,6 @@ export const routes: Routes = [
     { path: 'reactiveform', component: ReactiveFormsEg },
     { path: 'couserdetail', 
         loadComponent: () => import('./Components/course-detail/course-detail').then(m => m.CourseDetail)
-     }
+    }
 ];
     

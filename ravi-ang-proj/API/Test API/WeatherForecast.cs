@@ -10,4 +10,11 @@ namespace Test_API
 
     public string? Summary { get; set; }
   }
+
+  public class WeatherForeCast
+  {
+    public int Id { get; set; }
+    public string Sumary { get; set; }
+  }
+
 }

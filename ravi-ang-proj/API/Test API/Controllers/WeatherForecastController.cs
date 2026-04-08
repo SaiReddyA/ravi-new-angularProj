@@ -24,25 +24,29 @@ namespace Test_API.Controllers
     }
 
     [HttpPost(Name = "WeatherForecast")]
-    public IActionResult Post(string sumary)
+    public IActionResult Post([FromBody] WeatherForeCast weatherForeCast)
     {
-      this.Summaries.Add(sumary);
+      if (string.IsNullOrEmpty(weatherForeCast.Sumary) || !ModelState.IsValid)
+      {
+        return BadRequest("Summary cannot be empty");
+      }
+      this.Summaries.Add(weatherForeCast.Sumary);
       return Ok(this.Summaries);
     }
 
     [HttpPut(Name = "WeatherForecast")]
-    public IActionResult Put(int id, string sumary)
+    public IActionResult Put([FromBody] WeatherForeCast weatherForeCast)
     {
-      if (id < 0 || id >= this.Summaries.Count)
+      if (weatherForeCast.Id < 0 || weatherForeCast.Id >= this.Summaries.Count)
       {
         return BadRequest("Invalid ID");
       }
-      this.Summaries[id] = sumary;
+      this.Summaries[weatherForeCast.Id] = weatherForeCast.Sumary;
       return Ok(this.Summaries);
     }
 
-    [HttpDelete(Name = "WeatherForecast/{id}")]
-    public IActionResult Delete(int id)
+    [HttpDelete(Name = "WeatherForecast")]
+    public IActionResult Delete([FromQuery]int id)
     {
       this.Summaries.RemoveAt(id);
       return Ok(this.Summaries);
