@@ -2,6 +2,7 @@ import { HttpEvent, HttpHandler, HttpInterceptor, HttpInterceptorFn, HttpRequest
 import { Observable } from 'rxjs';
 
 export const hTTPAgularInterceptor: HttpInterceptorFn = (req, next) => {
+  
   return next(req);
 };
 
@@ -9,10 +10,10 @@ export const hTTPAgularInterceptor: HttpInterceptorFn = (req, next) => {
 
 
 
-export class Https implements HttpInterceptor {
+// export class Https implements HttpInterceptor {
  
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    throw new Error('Method not implemented.');
-  }
+//   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+//     throw new Error('Method not implemented.');
+//   }
 
-}
+// }
