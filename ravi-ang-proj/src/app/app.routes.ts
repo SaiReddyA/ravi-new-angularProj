@@ -12,6 +12,9 @@ export const routes: Routes = [
     { path: 'reactiveform', component: ReactiveFormsEg },
     { path: 'couserdetail', canActivate: [routecheckerGuard], 
         loadComponent: () => import('./Components/course-detail/course-detail').then(m => m.CourseDetail)
+    },
+    {
+        path: 'subject', loadComponent: () => import('./Components/subject/subject').then(m => m.Subject)
     }
 ];
     

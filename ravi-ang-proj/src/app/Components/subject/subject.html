@@ -1,0 +1,28 @@
+
+<h2>Subjects</h2>
+<br>
+<input placeholder = "Subject Name" [(ngModel)]="subjectModel.name" />
+<br>
+<br>
+
+<button (click)="addSubject()">Add</button>
+<button (click)="updateSubject()" >Update</button>
+<br>
+<br>
+@if (loading) {
+  <div>Loading...</div>
+}
+
+@if (errorMessage) {
+  <div style="color:red">{{ errorMessage }}</div>
+}
+
+<ul>
+  @for (s of subjects; track $index) {
+    <li>
+      {{ s.name }}
+      <button (click)="editSubject(s)">Edit</button>
+      <button (click)="deleteSubject(s.id)">Delete</button>
+    </li>
+  }
+</ul>

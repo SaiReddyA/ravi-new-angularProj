@@ -23,3 +23,27 @@ DELETE {{Test_API_HostAddress}}/weatherforecast/1
 Accept: application/json
 
 ###
+
+GET {{Test_API_HostAddress}}/Subject/
+Accept: application/json
+
+###
+
+
+POST {{Test_API_HostAddress}}/Subject/
+Content-Type: application/json
+Accept: application/json
+
+"MaterialScience"
+
+###
+
+PUT {{Test_API_HostAddress}}/Subject?id=1
+Content-Type: application/json
+Accept: application/json
+"Science-1"
+###
+
+DELETE {{Test_API_HostAddress}}/Subject?id=1
+
+Accept: application/json
