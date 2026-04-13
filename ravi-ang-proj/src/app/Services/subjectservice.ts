@@ -17,7 +17,7 @@ export class Subjectservice {
   // }
 
  getSubjects(): Observable<ISubject[]> {
-  return this.http.get<string[]>(this.baseUrl).pipe(
+  var resp = this.http.get<string[]>(this.baseUrl).pipe(
     map((data: string[]) =>
       data.map((item, index) => ({
         id: index,
@@ -25,6 +25,7 @@ export class Subjectservice {
       }))
     )
   );
+  return resp;
 }
 
   addSubject(subject: any): Observable<any> {

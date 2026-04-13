@@ -1,22 +1,25 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Subjectservice } from '../../Services/subjectservice';
 import { FormsModule } from '@angular/forms';
 
 
+export interface ISubject {
+  id: number;
+  name: string;
+}
 
 @Component({
-  selector: 'app-subject',
+  selector: 'app-subjects2',
   imports: [FormsModule],
-  templateUrl: './subject.html',
-  styleUrl: './subject.css',
+  templateUrl: './subjects2.html',
+  styleUrl: './subjects2.css',
 })
-export class Subject {
+export class Subjects2 {
 
-  constructor(private subjectService: Subjectservice, private cdr:ChangeDetectorRef) {
-    this.loadSubjects();
+  constructor(private subjectService: Subjectservice, private cdr: ChangeDetectorRef) {
   }
 
-  subjects: ISubject[] = [];
+   subjects: ISubject[] = [];
   loading = false;
   errorMessage = '';
 
@@ -26,7 +29,7 @@ export class Subject {
   };
 
   ngOnInit(): void {
-    
+        this.loadSubjects();
   }
 
   resetForm() {
@@ -43,7 +46,7 @@ export class Subject {
         this.errorMessage = 'ffeff';
         this.subjects = [...data];
                 console.log('Subjects loaded this.subjects:', this.subjects);
-                this.cdr.detectChanges();
+                        this.cdr.detectChanges();
       },
       error: (err: any) => {
         this.errorMessage = 'Failed to load subjects';
@@ -52,6 +55,7 @@ export class Subject {
       complete: () => {
         this.loading = false;
         this.errorMessage = 'ffeff';
+
       }
     });
   }
@@ -101,9 +105,4 @@ export class Subject {
       }
     });
   }
-}
-
-export interface ISubject {
-  id: number;
-  name: string;
 }
