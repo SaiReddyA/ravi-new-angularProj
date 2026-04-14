@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { Subjectservice } from '../../Services/subjectservice';
 import { FormsModule } from '@angular/forms';
 
@@ -12,7 +12,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class Subject {
 
-  constructor(private subjectService: Subjectservice) {
+  constructor(private subjectService: Subjectservice , private cdr : ChangeDetectorRef) {
   }
 
   subjects: ISubject[] = [];
@@ -40,6 +40,7 @@ export class Subject {
       next: (data: ISubject[]) => {
         this.subjects = data;
         this.loading = false;
+        this.cdr.detectChanges();
       },
       error: (err: any) => {
         this.errorMessage = 'Failed to load subjects';
@@ -57,6 +58,7 @@ export class Subject {
       next: () => {
         this.resetForm();
         this.loadSubjects();
+     
       },
       error: (err) => console.error(err)
     });

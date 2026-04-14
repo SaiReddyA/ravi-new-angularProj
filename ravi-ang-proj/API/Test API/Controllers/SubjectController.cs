@@ -6,7 +6,7 @@ namespace Test_API.Controllers
   [Route("[controller]")]
   public class SubjectController : ControllerBase
   {
-    private List<string> ListofSubject =
+    private static List<string> ListofSubject =
     [
         "Math", "Science", "English", "History", "Geography", "Physics", "Chemistry", "Biology", "Computer Science", "Art"
     ];
@@ -24,27 +24,27 @@ namespace Test_API.Controllers
       {
         return BadRequest("Subject cannot be empty");
       }
-      this.ListofSubject.Add(subject);
-      return Ok(this.ListofSubject);
+      ListofSubject.Add(subject);
+      return Ok(ListofSubject);
     }
 
     [HttpPut(Name = "Subject")]
     public IActionResult Put([FromBody] string subject, [FromQuery]int id)
     {
-      if (id < 0 || id >= this.ListofSubject.Count)
+      if (id < 0 || id >= ListofSubject.Count)
       {
         return BadRequest("Invalid ID");
       }
-      this.ListofSubject[id] = subject;
-      return Ok(this.ListofSubject);
+      ListofSubject[id] = subject;
+      return Ok(ListofSubject);
     }
 
 
     [HttpDelete(Name = "Subject")]
     public IActionResult Delete([FromQuery]int id)
     {
-      this.ListofSubject.RemoveAt(id);
-      return Ok(this.ListofSubject);
+      ListofSubject.RemoveAt(id);
+      return Ok(ListofSubject);
     }
   }
 }

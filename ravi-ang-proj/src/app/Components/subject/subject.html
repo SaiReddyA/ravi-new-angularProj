@@ -17,7 +17,7 @@
   <div style="color:red">{{ errorMessage }}</div>
 }
 
-<ul>
+<!-- <ul>
   @for (s of subjects; track $index) {
     <li>
       {{ s.name }}
@@ -25,4 +25,23 @@
       <button (click)="deleteSubject(s.id)">Delete</button>
     </li>
   }
-</ul>
+</ul> -->
+<table style="border:1px;">
+  <thead>
+    <tr>
+      <th>Subject Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (s of subjects; track $index) {
+      <tr>
+        <td>{{ s.name }}</td>
+        <td>
+          <button (click)="editSubject(s)">Edit</button>
+          <button (click)="deleteSubject(s.id)">Delete</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
