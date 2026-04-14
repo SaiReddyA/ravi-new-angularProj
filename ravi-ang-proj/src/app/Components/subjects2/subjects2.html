@@ -1,0 +1,30 @@
+
+<h2>Subjects</h2>
+<br>
+<input placeholder = "Subject Name" [(ngModel)]="subjectModel.name" />
+<br>
+<br>
+
+<button>Add iik</button>
+<button (click)="addSubject()">Add</button>
+<button (click)="updateSubject()" >Update</button>
+<br>
+<br>
+<!-- <button type="button" (click)="loadSubjects()">Load Table</button> -->
+@if (loading) {
+  <div>Loading...</div>
+}
+
+@if (errorMessage) {
+  <div style="color:red">{{ errorMessage }}</div>
+}
+
+<ul>
+  @if(subjects.length > 0) {
+    @for (subject of subjects; track subject.id) {
+      <li>{{ subject.name }}</li>
+    }
+  } @else {
+    <li>No subjects available.</li>
+  }
+</ul>
