@@ -20,4 +20,10 @@ describe('Lifecycles', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should call ngOnInit', () => {
+    spyOn(component, 'ngOnInit');
+    component.ngOnInit();
+    expect(component.ngOnInit).toHaveBeenCalled();
+  });
 });
