@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'app-employee-form',
@@ -11,6 +11,9 @@ export class EmployeeForm implements OnDestroy, OnInit {
   @Output() ChildEvent = new EventEmitter<string>();
   @Input() name: string = "";
 
+   ngOnChanges(changes: SimpleChanges): void {
+    console.log('employeeform Component changes detected', changes['name'].currentValue, changes);
+  }
   UpdateToParent(){
      this.ChildEvent.emit("Data from child to parent component");
   }

@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, Output } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, Output, SimpleChanges } from '@angular/core';
 import { EmployeeForm } from '../employee-form/employee-form';
 import { CRUD } from '../../Services/crud';
 import { FormsModule } from '@angular/forms';
@@ -16,13 +16,16 @@ export interface Employee{
   templateUrl: './employee-list.html',
   styleUrl: './employee-list.css',
 })
-export class EmployeeList implements OnInit {
+export class EmployeeList implements OnInit, OnDestroy {
  /**Parent and Child communication Concept */
   username: string = "Ravi Kumar passing information to child component";
   nameChange: string = ""; 
   receiveMessage($event: any){
     console.log("Message received from child component : " + $event);
     this.nameChange = $event;
+  }
+   ngOnChanges(changes: SimpleChanges): void {
+    console.log('employeeList Component changes detected', changes['name'].currentValue, changes);
   }
 
 /* dependency injection
@@ -97,5 +100,10 @@ AddEmployee(): void{
     this.curd.DeleteEmployee(id)
     this.employeeObject = {} as Employee; // Clear the form after deleting an employee
     this.GetEmployees(); // Refresh the employee list after deleting an employee
+  }
+  ngOnDestroy(): void {
+     debugger
+    console.log("Employee List component destroyed");
+    debugger
   }
 }
